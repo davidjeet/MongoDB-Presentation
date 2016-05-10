@@ -1,0 +1,61 @@
+﻿@model IEnumerable<MvcApplication1.Models.Post>
+
+<h2 style="color: red;">
+    @ViewBag.Status
+</h2>
+
+<div style="width: 75%; float: left;">
+    @foreach (var item in Model)
+    {
+        <div>
+            <h3 style="color: #620707;">
+                @Html.DisplayFor(modelItem => item.Title)
+            </h3>
+            <span style="background-color: #eae2b3">@item.CreatedOn
+                <em>@item.Author.FirstName @item.Author.LastName</em>
+            </span>
+            <p>
+                @Html.DisplayFor(modelItem => item.Content)
+            </p>
+
+            <div style="margin-bottom: 10px;">
+                <div style="color: #620707">
+                    Tags:             
+                @foreach (var tag in item.Tags)
+                {
+                    <a href="#">@tag</a>
+                }
+                </div>
+                <div>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+            @Html.ActionLink("Add Comment", "AddComment", new { id = item.Id }) |
+            @Html.ActionLink("Delete Post", "Delete", new { id = item.Id })
+                </div>
+                <br />
+                <div style="background-color: #faefda;color:#620707;">
+                    @if (item.Comments.Count > 0)
+                    {  
+                        <strong>Comments: </strong><br /> <br />
+                        foreach (var comment in item.Comments.OrderBy(d=>d.CreatedOn))
+                        {
+                        <div style="margin-left: 15px; padding-left: 15px;">
+                            <div style="background-color: #eae2b3">@comment.CreatedOn <em>@comment.Author.FirstName @comment.Author.LastName</em></div>
+                            <span>@comment.Content</span>
+                            <hr /> <br />
+                        </div>
+                        }
+                    }
+                </div>
+            </div>
+            <hr /> 
+        </div>
+    }
+</div>
+
+<div style="float: right; width: 23%;text-align:center;">
+    <h2 style="color:brown;">Tag Cloud</h2>
+    <h4 style="margin-left:30px;color:blue;text-align:left;">@ViewBag.TagCloud</h4>
+</div>
+<div style="clear: both;"></div>
+<!-- Clear the float -->
+

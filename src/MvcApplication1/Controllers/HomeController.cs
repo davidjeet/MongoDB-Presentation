@@ -17,16 +17,6 @@ namespace MvcApplication1.Controllers
         public readonly PostsContext Context = new PostsContext();
         public readonly PostsContextNewApi ContextNewApi = new PostsContextNewApi();
 
-        ////public ActionResult Index()
-        ////{
-        ////    var cursor = Context.Posts.FindAllAs<Post>().OrderByDescending(x =>x.CreatedOn);
-        ////    ////if (cursor.Any()) 
-        ////    ////{
-        ////    ////    ViewBag.TagCloud = GetTagList(collection);
-        ////    ////}
-        ////    return View(cursor.ToList());
-        ////}
-
         public async Task<ActionResult> Index()
         {
             var posts = await ContextNewApi.Posts
@@ -185,59 +175,16 @@ namespace MvcApplication1.Controllers
                 results.Add(doc["_id"].AsString, doc["TagFrequency"].AsInt32);
             });
 
+            
             var list = new List<string>();
-            return string.Join(",", list);
+
+            results.Keys.ToList().ForEach(key => list.Add(
+               string.Format("{0}({1})", key, results[key])));
+
+            return string.Join(", ", list);
         }
 
-        public ActionResult JoinWithLookup()
-        {
-            var 
-        }
 
-
-
-        //DEPREACATED
-        ////private string GetTagList(MongoCollection<Post> collection)
-        ////{
-        ////    string map = @"function() {
-
-        ////                   if (!this.Tags) {
-        ////                      return;
-        ////                   }
-
-        ////                   for (index in this.Tags) {
-        ////                       emit(this.Tags[index].trim(), 1);
-        ////                   }
-        ////                }";
-
-
-        ////    string reduce = @"function(previous, current) {
-
-        ////                           var count = 0;
-
-        ////                           for (index in current) {
-        ////                                count += current[index];
-        ////                           }
-        ////                        return count;
-        ////                    }";
-
-        ////    var options = new MongoDB.Driver.Builders.BuilderBase. MapReduceOptionsBuilder();
-        ////    options.SetOutput(MongoDB.Driver.Builders.MapReduceOutput.Replace("Tags"));
-        ////    var results = collection.MapReduce(map, reduce, options);
-        ////    var tagList = new System.Text.StringBuilder("");
-        ////    foreach (var tag in results.GetResults())
-        ////    {
-        ////        if (string.Empty == tagList.ToString())
-        ////        {
-        ////            tagList.AppendFormat("{0}({1})", tag["_id"], tag["value"]);
-        ////        }
-        ////        else
-        ////        {
-        ////            tagList.AppendFormat(", {0}({1}) ", tag["_id"], tag["value"]);
-        ////        }
-        ////    }
-        ////    return tagList.ToString();
-        ////}
 
         #endregion
     }

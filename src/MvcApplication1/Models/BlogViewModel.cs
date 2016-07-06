@@ -4,6 +4,8 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MvcApplication1.Models
 {
+    #region PostViewModel Implementation
+
     public class PostViewModel
     {
         public string Id { get; set; }
@@ -38,6 +40,9 @@ namespace MvcApplication1.Models
         }
     }
 
+    #endregion
+
+    #region CommentViewModel implementation
     public class CommentViewModel
     {
         [System.ComponentModel.DisplayName("Content of Comment")]
@@ -75,5 +80,6 @@ namespace MvcApplication1.Models
         }
 
     }
+    #endregion
 
 }

@@ -18,9 +18,7 @@ namespace MvcApplication1.Models
             var settings = MongoClientSettings.FromUrl(new MongoUrl(ConnectionString));
             settings.ClusterConfigurator = builder => builder.Subscribe<CommandStartedEvent>(started =>
             {
-
-            }
-            );
+            });
             MongoClient client = new MongoClient(settings);
             Database = client.GetDatabase("test");
         }

@@ -20,5 +20,16 @@ namespace MvcApplication1.Models
         }
 
         public MongoCollection<Post> Posts => Database.GetCollection<Post>("posts");
+
+
+        ////public IMongoDatabase Database;
+
+        ////public PostsContext()
+        ////{
+        ////    MongoClient client = new MongoClient(ConnectionString);
+        ////    Database = client.GetDatabase("test");
+        ////}
+
+        ////public IMongoCollection<Post> Posts => Database.GetCollection<Post>("posts");
     }
 }

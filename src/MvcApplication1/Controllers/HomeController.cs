@@ -32,7 +32,6 @@ namespace MvcApplication1.Controllers
         }
 
 
-
         [HttpGet]
         public ActionResult AddPost()
         {
@@ -118,7 +117,7 @@ namespace MvcApplication1.Controllers
         }
 
 
-        #region Map Reduce Tag Cloud
+        #region Aggregation Framework Implementation of Tag Cloud
 
         public class PostTags
         {
@@ -183,8 +182,6 @@ namespace MvcApplication1.Controllers
 
             return string.Join(", ", list);
         }
-
-
 
         #endregion
     }
